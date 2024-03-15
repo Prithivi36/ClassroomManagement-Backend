@@ -13,9 +13,5 @@ public class StudentService {
     private StudentRepository studentRepository;
     private ModelMapper modelMapper;
 
-    public StudentDto getStudentInfo(Long id){
-        StudentInfo studentInfo=studentRepository.findById(id).get();
-        StudentDto studentDto=modelMapper.map(studentInfo, StudentDto.class);
-        return studentDto;
-    }
+
 }

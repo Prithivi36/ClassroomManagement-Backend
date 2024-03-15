@@ -1,24 +1,21 @@
-package com.Classroom.Classroom.Entity;
+package com.Classroom.Classroom.dto;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.util.List;
 
-@Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class OnDutyEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class LeaveRequestDto {
     private Long id;
+    private int studentId;
+    private int StudentName;
     private LocalDate date;
     private String reason;
-
+    private Boolean status;
 }
