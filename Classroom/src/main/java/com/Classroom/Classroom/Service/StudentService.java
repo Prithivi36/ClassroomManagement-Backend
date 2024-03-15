@@ -4,28 +4,18 @@ import com.Classroom.Classroom.Entity.StudentInfo;
 import com.Classroom.Classroom.Repository.StudentRepository;
 import com.Classroom.Classroom.dto.StudentDto;
 import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
 public class StudentService {
-    StudentRepository studentRepository;
+    private StudentRepository studentRepository;
+    private ModelMapper modelMapper;
 
     public StudentDto getStudentInfo(Long id){
         StudentInfo studentInfo=studentRepository.findById(id).get();
-        StudentDto studentDto=new StudentDto(
-                studentInfo.getId(),
-                studentInfo.getStudentName(),
-                studentInfo.getBranch(),
-                studentInfo.getPhone(),
-                studentInfo.getMail(),
-                studentInfo.getFatherNumber(),
-                studentInfo.getMotherNumber(),
-                studentInfo.getBloodGroup(),
-                studentInfo.getCGPA(),
-                studentInfo.getStudentConcern()
-
-        );
+        StudentDto studentDto=modelMapper.map(studentInfo, StudentDto.class);
         return studentDto;
     }
 }

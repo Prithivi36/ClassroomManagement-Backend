@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -26,4 +28,22 @@ public class StudentInfo {
     private String bloodGroup;
     private int CGPA;
     private int studentConcern;
+
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JoinTable(
+            joinColumns = @JoinColumn(referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(referencedColumnName = "id")
+    )
+    private List<OnDutyEntity> onDutyEntities;
+
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JoinTable(
+            joinColumns = @JoinColumn(referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(referencedColumnName = "id")
+    )
+    private List<StudentAbsent> absentList;
+
+    @OneToMany(cascade = CascadeType.ALL ,fetch = FetchType.EAGER)
+    @JoinColumn(referencedColumnName = "id")
+    private List<LeaveRequestEntity> leaveRequests;
 }
