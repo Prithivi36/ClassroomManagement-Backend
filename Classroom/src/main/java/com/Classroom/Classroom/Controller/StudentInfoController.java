@@ -1,0 +1,20 @@
+package com.Classroom.Classroom.Controller;
+
+import com.Classroom.Classroom.Service.StudentService;
+import com.Classroom.Classroom.dto.StudentDto;
+import lombok.AllArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@AllArgsConstructor
+public class StudentInfoController {
+    StudentService studentService;
+
+    @GetMapping("/{id}")
+    public StudentDto getStudent(@PathVariable Long id){
+        return  studentService.getStudentInfo(id);
+    }
+
+}
