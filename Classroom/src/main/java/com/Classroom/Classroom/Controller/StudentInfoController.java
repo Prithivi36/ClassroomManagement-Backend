@@ -1,6 +1,5 @@
 package com.Classroom.Classroom.Controller;
 
-import com.Classroom.Classroom.Service.StudentService;
 import com.Classroom.Classroom.dto.StudentDto;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
