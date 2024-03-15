@@ -9,11 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @AllArgsConstructor
 public class StudentInfoController {
-    StudentService studentService;
 
-    @GetMapping("/{id}")
-    public StudentDto getStudent(@PathVariable Long id){
-        return  studentService.getStudentInfo(id);
-    }
 
 }
