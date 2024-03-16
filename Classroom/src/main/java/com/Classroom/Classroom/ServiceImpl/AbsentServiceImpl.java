@@ -35,17 +35,12 @@ public class AbsentServiceImpl implements AbsentService {
     @Override
     public String markDownAbsent(List<Integer> absenteesNumbers) {
 
-        //today
         LocalDate today=LocalDate.now();
-
-
-
 
         for(int studentNumber : absenteesNumbers){
             StudentAbsent foundDate=studentAbsentRepo.findByDate(today).orElseGet(()->{
                 StudentAbsent newStudentAbsent=new StudentAbsent();
                 newStudentAbsent.setDate(today);
-
                 return newStudentAbsent;
             });
 
@@ -54,47 +49,6 @@ public class AbsentServiceImpl implements AbsentService {
             studentRepository.save(foundStudent);
 
         }
-
-        //if not foundDate
-//        if (foundDate == null) {
-//            List<StudentInfo> addedStudents=new ArrayList<>();
-//            for(int studs : absenteesNumbers){
-//                addedStudents.add(studentRepository.findByRegNo(studs).get());
-//            }
-//            StudentAbsent cascadingAbsent=new StudentAbsent();
-//            cascadingAbsent.setDate(today);
-//            cascadingAbsent.setAbsentList(addedStudents);
-//            studentAbsentRepo.save(cascadingAbsent);
-//
-//            for(int student: absenteesNumbers){
-//                StudentInfo foundStudent=studentRepository.findByRegNo(student).get();
-//                List<StudentAbsent> absentList=foundStudent.getAbsentList();
-//
-//                absentList.add(cascadingAbsent);
-//
-//                studentRepository.save(foundStudent);
-//            }
-//        }
-//
-//
-//
-//
-//        //if found date
-//        if(foundDate!=null) {
-//            for (int person : absenteesNumbers) {
-//                StudentInfo foundStudent = studentRepository.findByRegNo(person).get();
-//                List<StudentAbsent> absentFound = foundStudent.getAbsentList();
-//
-//                absentFound.add(foundDate);
-//                studentRepository.save(foundStudent);
-//
-//                List<StudentInfo> foundStudents = foundDate.getAbsentList();
-//
-//                foundStudents.add(foundStudent);
-//
-//                studentAbsentRepo.save(foundDate);
-//            }
-//        }
         return "MarKed Down";
     }
 }

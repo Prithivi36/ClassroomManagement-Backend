@@ -12,5 +12,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class LeaveListDto {
+    //for Receiving List as Input
     private List<Integer> incomingList;
 }
