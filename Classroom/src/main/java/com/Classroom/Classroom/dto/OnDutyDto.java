@@ -17,6 +17,4 @@ import java.util.List;
 public class OnDutyDto {
     private Long id;
     private LocalDate date;
-
-    private List<StudentInfo> onDutyMembers;
 }

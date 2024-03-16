@@ -1,6 +1,7 @@
 package com.Classroom.Classroom.Controller;
 
 import com.Classroom.Classroom.Service.StudentInfoService;
+import com.Classroom.Classroom.dto.OnDutyDto;
 import com.Classroom.Classroom.dto.StudentAbsentDto;
 import com.Classroom.Classroom.dto.StudentDto;
 import lombok.AllArgsConstructor;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
+@RequestMapping("/student")
 public class StudentInfoController {
 
     private StudentInfoService studentInfoService;
@@ -29,8 +31,13 @@ public class StudentInfoController {
     public StudentDto getSpecificStud(@PathVariable("regNo") int regNo){
         return studentInfoService.getSpecificStudent(regNo);
     }
-    @GetMapping("/abs/{regNo}")
+    @GetMapping("/ab/{regNo}")
     public List<StudentAbsentDto> getStudAbsOnDate(@PathVariable("regNo") int regNo){
         return studentInfoService.getStudentAbsent(regNo);
+    }
+
+    @GetMapping("/od/{regNo}")
+    public List<OnDutyDto> getStudOnDuty(@PathVariable("regNo") int regNo){
+        return studentInfoService.getStudentOnDuty(regNo);
     }
 }

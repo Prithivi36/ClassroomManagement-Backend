@@ -21,7 +21,7 @@ public interface StudentInfoService {
 
     List<StudentAbsentDto> getStudentAbsent(int regNo);
 
-    OnDutyDto getStudentOnDuty(int regNo);
+    List<OnDutyDto> getStudentOnDuty(int regNo);
 
     LeaveRequestDto getStudentLeaveRequests(int regNo);
 }

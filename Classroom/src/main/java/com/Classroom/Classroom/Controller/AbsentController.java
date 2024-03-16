@@ -11,17 +11,18 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
+@RequestMapping("/absent")
 public class AbsentController {
 
     private AbsentService absentService;
 
-    @PostMapping("/abs")
+    @PostMapping("/send")
     public String studentAbsentMarkdown(@RequestBody ListDto leaveListDto){
         List<Integer> reg=leaveListDto.getIncomingList();
         return absentService.markDownAbsent(reg);
     }
 
-    @GetMapping("ab/{date}")
+    @GetMapping("on/{date}")
     public List<StudentDto> getStudentsOnDate(@PathVariable  LocalDate date){
         return absentService.getAbsentsOnDate(date);
     }

@@ -45,9 +45,9 @@ public class StudentInfoServiceImpl implements StudentInfoService {
     }
 
     @Override
-    public OnDutyDto getStudentOnDuty(int regNo) {
+    public List<OnDutyDto> getStudentOnDuty(int regNo) {
         StudentInfo foundStudent=studentRepository.findByRegNo(regNo).get();
-        return modelMapper.map(foundStudent.getOnDutyEntities(), OnDutyDto.class);
+        return foundStudent.getOnDutyEntities().stream().map((ond)->modelMapper.map(ond, OnDutyDto.class)).toList();
     }
 
     @Override

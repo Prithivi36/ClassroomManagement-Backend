@@ -12,16 +12,17 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
+@RequestMapping("/onduty")
 public class OnDutyController {
 
     private OnDutyService onDutyService;
 
-    @PostMapping("/od")
+    @PostMapping("/send")
     public String onDutyMarkDown(@RequestBody  ListDto onDutyListDto){
         List<Integer> onDutyList=onDutyListDto.getIncomingList();
         return onDutyService.markDownOnDuty(onDutyList);
     }
-    @GetMapping("od/{date}")
+    @GetMapping("on/{date}")
     public List<StudentDto> getStudentsOnDate(@PathVariable LocalDate date){
         return onDutyService.getOnDutyOnSpecificDate(date);
     }
