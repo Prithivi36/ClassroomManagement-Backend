@@ -39,9 +39,9 @@ public class StudentInfoServiceImpl implements StudentInfoService {
     }
 
     @Override
-    public StudentAbsentDto getStudentAbsent(int regNo) {
+    public List<StudentAbsentDto> getStudentAbsent(int regNo) {
         StudentInfo foundStudent=studentRepository.findByRegNo(regNo).get();
-        return modelMapper.map(foundStudent.getAbsentList(), StudentAbsentDto.class);
+        return foundStudent.getAbsentList().stream().map((abs)->modelMapper.map(abs,StudentAbsentDto.class)).toList();
     }
 
     @Override

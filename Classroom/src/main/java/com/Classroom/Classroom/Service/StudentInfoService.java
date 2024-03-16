@@ -19,7 +19,7 @@ public interface StudentInfoService {
 
     StudentDto getSpecificStudent(int regNo);
 
-    StudentAbsentDto getStudentAbsent(int regNo);
+    List<StudentAbsentDto> getStudentAbsent(int regNo);
 
     OnDutyDto getStudentOnDuty(int regNo);
 

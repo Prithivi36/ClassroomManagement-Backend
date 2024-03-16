@@ -29,10 +29,10 @@ public class OnDutyServiceImpl implements OnDutyService {
     }
 
     @Override
-    public List<OnDutyDto> getOnDutyOnSpecificDate(LocalDate specificDate) {
+    public List<StudentDto> getOnDutyOnSpecificDate(LocalDate specificDate) {
         OnDutyEntity OnDutyOnDate=onDutyEntityRepo.findByDate(specificDate).get();
         List<StudentInfo> foundStudents=OnDutyOnDate.getOnDutyMembers();
-        return foundStudents.stream().map((std)->modelMapper.map(std, OnDutyDto.class)).toList();
+        return foundStudents.stream().map((std)->modelMapper.map(std, StudentDto.class)).toList();
     }
 
     @Override

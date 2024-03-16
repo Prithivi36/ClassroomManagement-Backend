@@ -22,7 +22,7 @@ public class OnDutyController {
         return onDutyService.markDownOnDuty(onDutyList);
     }
     @GetMapping("od/{date}")
-    public List<OnDutyDto> getStudentsOnDate(@PathVariable LocalDate date){
+    public List<StudentDto> getStudentsOnDate(@PathVariable LocalDate date){
         return onDutyService.getOnDutyOnSpecificDate(date);
     }
 }
