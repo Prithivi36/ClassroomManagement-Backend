@@ -4,7 +4,7 @@ import com.Classroom.Classroom.dto.LeaveRequestDto;
 import org.springframework.stereotype.Service;
 
 @Service
-public interface LeaveManageServiceImpl {
+public interface LeaveManageService {
 
     String raiseRequest(LeaveRequestDto leaveRequestDto);
     String acceptOrDeclineRequest(Long requestId);
