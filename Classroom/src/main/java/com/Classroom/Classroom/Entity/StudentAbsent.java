@@ -1,9 +1,6 @@
 package com.Classroom.Classroom.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,6 +9,7 @@ import lombok.Setter;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -23,7 +21,13 @@ public class StudentAbsent {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDate date;
-    private String reason;
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(
+            joinColumns = @JoinColumn(referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(referencedColumnName = "id")
+    )
+    private List<StudentInfo> absentList;
+
 
 
 }

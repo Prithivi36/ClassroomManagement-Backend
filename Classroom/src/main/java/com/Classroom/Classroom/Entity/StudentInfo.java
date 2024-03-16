@@ -19,6 +19,7 @@ public class StudentInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private int regNo;
     private String studentName;
     private String branch;
     private int phone;
@@ -28,6 +29,7 @@ public class StudentInfo {
     private String bloodGroup;
     private int CGPA;
     private int studentConcern;
+    private String password;
 
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinTable(
