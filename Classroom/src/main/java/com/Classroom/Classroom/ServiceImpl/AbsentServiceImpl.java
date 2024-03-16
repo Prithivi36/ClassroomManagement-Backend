@@ -7,12 +7,14 @@ import com.Classroom.Classroom.Repository.StudentRepository;
 import com.Classroom.Classroom.Service.AbsentService;
 import com.Classroom.Classroom.dto.StudentAbsentDto;
 import com.Classroom.Classroom.dto.StudentDto;
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
-
+import org.springframework.stereotype.Service;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
+@Service
+@AllArgsConstructor
 public class AbsentServiceImpl implements AbsentService {
 
     private  StudentAbsentRepo studentAbsentRepo;
@@ -25,9 +27,10 @@ public class AbsentServiceImpl implements AbsentService {
 
     @Override
     public List<StudentDto> getAbsentsOnDate(LocalDate specificDate) {
-        StudentAbsent absentonDate=studentAbsentRepo.findByDate(specificDate).get();
-        List<StudentInfo> foundStudents=absentonDate.getAbsentList();
-        return foundStudents.stream().map((std)->modelMapper.map(foundStudents, StudentDto.class)).toList();
+//        StudentAbsent absentOnDate=studentAbsentRepo.findByDate(specificDate).get();
+//        List<StudentInfo> foundStudents=absentOnDate.getAbsentList();
+        return null;
+//                foundStudents.stream().map((std)->modelMapper.map(foundStudents, StudentDto.class)).toList();
     }
 
     @Override
@@ -36,23 +39,23 @@ public class AbsentServiceImpl implements AbsentService {
         //today
         LocalDate today=LocalDate.now();
 
-        StudentAbsent foundDate=studentAbsentRepo.findByDate(today).orElseGet(()->{
-            StudentAbsent newStudentAbsent=new StudentAbsent();
-            newStudentAbsent.setDate(today);
 
-            return newStudentAbsent;
-        });
 
 
         for(int studentNumber : absenteesNumbers){
-            StudentInfo foundStudent=studentRepository.findByRegNo(studentNumber).orElse(null);
+            StudentAbsent foundDate=studentAbsentRepo.findByDate(today).orElseGet(()->{
+                StudentAbsent newStudentAbsent=new StudentAbsent();
+                newStudentAbsent.setDate(today);
+
+                return newStudentAbsent;
+            });
+
+            StudentInfo foundStudent=studentRepository.findByRegNo(studentNumber).get();
             foundStudent.getAbsentList().add(foundDate);
             studentRepository.save(foundStudent);
 
-            foundDate.getAbsentList().add(foundStudent);
         }
 
-        studentAbsentRepo.save(foundDate);
         //if not foundDate
 //        if (foundDate == null) {
 //            List<StudentInfo> addedStudents=new ArrayList<>();
@@ -93,6 +96,6 @@ public class AbsentServiceImpl implements AbsentService {
 //                studentAbsentRepo.save(foundDate);
 //            }
 //        }
-        return "Marekd Down";
+        return "MarKed Down";
     }
 }
