@@ -11,7 +11,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class LeaveListDto {
+public class ListDto {
     //for Receiving List as Input
     private List<Integer> incomingList;
 }
