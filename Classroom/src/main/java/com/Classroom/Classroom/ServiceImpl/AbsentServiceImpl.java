@@ -27,10 +27,9 @@ public class AbsentServiceImpl implements AbsentService {
 
     @Override
     public List<StudentDto> getAbsentsOnDate(LocalDate specificDate) {
-//        StudentAbsent absentOnDate=studentAbsentRepo.findByDate(specificDate).get();
-//        List<StudentInfo> foundStudents=absentOnDate.getAbsentList();
-        return null;
-//                foundStudents.stream().map((std)->modelMapper.map(foundStudents, StudentDto.class)).toList();
+        StudentAbsent absentOnDate=studentAbsentRepo.findByDate(specificDate).get();
+        List<StudentInfo> foundStudents=absentOnDate.getStudentInfos();
+        return foundStudents.stream().map((std)->modelMapper.map(std, StudentDto.class)).toList();
     }
 
     @Override

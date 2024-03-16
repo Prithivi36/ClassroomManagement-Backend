@@ -2,11 +2,11 @@ package com.Classroom.Classroom.Controller;
 
 import com.Classroom.Classroom.Service.AbsentService;
 import com.Classroom.Classroom.dto.LeaveListDto;
+import com.Classroom.Classroom.dto.StudentDto;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -19,5 +19,10 @@ public class AbsentController {
     public String studentAbsentMarkdown(@RequestBody LeaveListDto leaveListDto){
         List<Integer> reg=leaveListDto.getIncomingList();
         return absentService.markDownAbsent(reg);
+    }
+
+    @GetMapping("on/{date}")
+    public List<StudentDto> getStudentsOnDate(@PathVariable  LocalDate date){
+        return absentService.getAbsentsOnDate(date);
     }
 }
