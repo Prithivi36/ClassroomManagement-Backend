@@ -1,6 +1,6 @@
 package com.Classroom.Classroom.dto;
 
-import com.Classroom.Classroom.Entity.LeaveRequestEntity;
+import com.Classroom.Classroom.Entity.LeaveOrOdRequestEntity;
 import com.Classroom.Classroom.Entity.OnDutyEntity;
 import com.Classroom.Classroom.Entity.StudentAbsent;
 import lombok.AllArgsConstructor;
@@ -29,6 +29,6 @@ public class StudentDto {
     private String password;
     private List<OnDutyEntity> onDutyEntities;
     private List<StudentAbsent> absentList;
-    private List<LeaveRequestEntity> leaveRequests;
+    private List<LeaveOrOdRequestEntity> leaveOrOdRequests;
 
 }
