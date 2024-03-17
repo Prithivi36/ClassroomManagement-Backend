@@ -1,6 +1,5 @@
-package com.Classroom.Classroom.Entity;
+package com.Classroom.Classroom.dto;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,20 +7,18 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 
-@Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class LeaveRequestEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class LeaveOrOdRequestDto {
     private Long id;
+    private String type;
     private int studentId;
-    private int StudentName;
+    private String StudentName;
     private LocalDate date;
     private String reason;
     private Boolean status;
+    private String leaveRequestsId;
 
 }
