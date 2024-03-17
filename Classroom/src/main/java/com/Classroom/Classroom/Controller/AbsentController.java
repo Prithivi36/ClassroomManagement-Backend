@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.List;
 
+@CrossOrigin("*")
 @RestController
 @AllArgsConstructor
 @RequestMapping("/absent")
@@ -17,8 +18,8 @@ public class AbsentController {
     private AbsentService absentService;
 
     @PostMapping("/send")
-    public String studentAbsentMarkdown(@RequestBody ListDto leaveListDto){
-        List<Integer> reg=leaveListDto.getIncomingList();
+    public String studentAbsentMarkdown(@RequestBody ListDto ListDto){
+        List<Integer> reg=ListDto.getIncomingList();
         return absentService.markDownAbsent(reg);
     }
 
