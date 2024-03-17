@@ -1,6 +1,5 @@
 package com.Classroom.Classroom.Entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -48,5 +47,5 @@ public class StudentInfo {
 
     @OneToMany(cascade = CascadeType.ALL ,fetch = FetchType.EAGER)
     @JoinColumn(referencedColumnName = "id")
-    private List<LeaveRequestEntity> leaveRequests;
+    private List<LeaveOrOdRequestEntity> leaveOrOdRequests;
 }

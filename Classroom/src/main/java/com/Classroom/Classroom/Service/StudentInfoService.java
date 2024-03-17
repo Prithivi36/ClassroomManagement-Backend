@@ -1,11 +1,9 @@
 package com.Classroom.Classroom.Service;
 
-import com.Classroom.Classroom.Repository.StudentRepository;
-import com.Classroom.Classroom.dto.LeaveRequestDto;
+import com.Classroom.Classroom.dto.LeaveOrOdRequestDto;
 import com.Classroom.Classroom.dto.OnDutyDto;
 import com.Classroom.Classroom.dto.StudentAbsentDto;
 import com.Classroom.Classroom.dto.StudentDto;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,5 +21,5 @@ public interface StudentInfoService {
 
     List<OnDutyDto> getStudentOnDuty(int regNo);
 
-    LeaveRequestDto getStudentLeaveRequests(int regNo);
+    List<LeaveOrOdRequestDto> getStudentLeaveRequests(int regNo);
 }

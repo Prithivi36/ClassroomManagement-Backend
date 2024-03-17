@@ -3,7 +3,7 @@ package com.Classroom.Classroom.ServiceImpl;
 import com.Classroom.Classroom.Entity.StudentInfo;
 import com.Classroom.Classroom.Repository.StudentRepository;
 import com.Classroom.Classroom.Service.StudentInfoService;
-import com.Classroom.Classroom.dto.LeaveRequestDto;
+import com.Classroom.Classroom.dto.LeaveOrOdRequestDto;
 import com.Classroom.Classroom.dto.OnDutyDto;
 import com.Classroom.Classroom.dto.StudentAbsentDto;
 import com.Classroom.Classroom.dto.StudentDto;
@@ -51,8 +51,8 @@ public class StudentInfoServiceImpl implements StudentInfoService {
     }
 
     @Override
-    public LeaveRequestDto getStudentLeaveRequests(int regNo) {
+    public List<LeaveOrOdRequestDto> getStudentLeaveRequests(int regNo) {
         StudentInfo foundStudent=studentRepository.findByRegNo(regNo).get();
-        return modelMapper.map(foundStudent.getLeaveRequests(), LeaveRequestDto.class);
+        return foundStudent.getLeaveOrOdRequests().stream().map((req)->modelMapper.map(req, LeaveOrOdRequestDto.class)).toList();
     }
 }
