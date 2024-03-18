@@ -23,22 +23,30 @@ public class StudentInfoController {
         return studentInfoService.registerNewStudent(studentDto);
     }
 
+    @PostMapping("/newList")
+    public String getMultiple(@RequestBody List<StudentDto> studentDtos){
+        for(StudentDto i : studentDtos){
+             studentInfoService.registerNewStudent(i);
+        }
+        return "Success";
+    }
+
     @GetMapping("/getAll")
     public List<StudentDto> grtAllStudent(){
         return studentInfoService.getAllStudentsInfo();
     }
 
     @GetMapping("/get/{regNo}")
-    public StudentDto getSpecificStud(@PathVariable("regNo") int regNo){
+    public StudentDto getSpecificStud(@PathVariable("regNo") Long regNo){
         return studentInfoService.getSpecificStudent(regNo);
     }
     @GetMapping("/ab/{regNo}")
-    public List<StudentAbsentDto> getStudAbsOnDate(@PathVariable("regNo") int regNo){
+    public List<StudentAbsentDto> getStudAbsOnDate(@PathVariable("regNo") Long regNo){
         return studentInfoService.getStudentAbsent(regNo);
     }
 
     @GetMapping("/od/{regNo}")
-    public List<OnDutyDto> getStudOnDuty(@PathVariable("regNo") int regNo){
+    public List<OnDutyDto> getStudOnDuty(@PathVariable("regNo") Long regNo){
         return studentInfoService.getStudentOnDuty(regNo);
     }
 }

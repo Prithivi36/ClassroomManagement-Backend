@@ -19,7 +19,7 @@ public class StudentInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private int regNo;
+    private Long regNo;
     private String studentName;
     private String branch;
     private Long phone;

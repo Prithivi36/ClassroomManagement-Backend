@@ -25,9 +25,7 @@ public class LeaveOrOdServiceImpl implements LeaveOrOdService {
         leaveOrOdRequest.setStatus(false);
         leaveOrOdRepo.save(leaveOrOdRequest);
 
-        int requestedStudent=leaveOrOdRequestDto.getStudentId();
-        System.out.println(requestedStudent);
-        System.out.println(unqiueConstraint);
+        Long requestedStudent=leaveOrOdRequestDto.getStudentId();
         StudentInfo foundStudent=studentRepository.findByRegNo(requestedStudent).get();
         List<LeaveOrOdRequestEntity> listOfRequest=foundStudent.getLeaveOrOdRequests();
         listOfRequest.add(leaveOrOdRepo.findByLeaveRequestId(unqiueConstraint).get());

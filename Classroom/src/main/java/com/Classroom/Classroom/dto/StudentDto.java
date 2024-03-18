@@ -16,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 public class StudentDto {
     private Long id;
-    private int regNo;
+    private Long regNo;
     private String studentName;
     private String branch;
     private Long phone;

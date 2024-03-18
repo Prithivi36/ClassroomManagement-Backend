@@ -9,5 +9,5 @@ import java.util.Optional;
 
 @Repository
 public interface StudentRepository extends JpaRepository<StudentInfo,Long> {
-    Optional<StudentInfo> findByRegNo(int regNo);
+    Optional<StudentInfo> findByRegNo(Long regNo);
 }

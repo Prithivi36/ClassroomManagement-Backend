@@ -15,11 +15,11 @@ public interface StudentInfoService {
 
     List<StudentDto> getAllStudentsInfo();
 
-    StudentDto getSpecificStudent(int regNo);
+    StudentDto getSpecificStudent(Long regNo);
 
-    List<StudentAbsentDto> getStudentAbsent(int regNo);
+    List<StudentAbsentDto> getStudentAbsent(Long regNo);
 
-    List<OnDutyDto> getStudentOnDuty(int regNo);
+    List<OnDutyDto> getStudentOnDuty(Long regNo);
 
-    List<LeaveOrOdRequestDto> getStudentLeaveRequests(int regNo);
+    List<LeaveOrOdRequestDto> getStudentLeaveRequests(Long regNo);
 }

@@ -33,25 +33,25 @@ public class StudentInfoServiceImpl implements StudentInfoService {
     }
 
     @Override
-    public StudentDto getSpecificStudent(int regNo) {
+    public StudentDto getSpecificStudent(Long regNo) {
         StudentInfo foundStudent= studentRepository.findByRegNo(regNo).get();
         return modelMapper.map(foundStudent,StudentDto.class);
     }
 
     @Override
-    public List<StudentAbsentDto> getStudentAbsent(int regNo) {
+    public List<StudentAbsentDto> getStudentAbsent(Long regNo) {
         StudentInfo foundStudent=studentRepository.findByRegNo(regNo).get();
         return foundStudent.getAbsentList().stream().map((abs)->modelMapper.map(abs,StudentAbsentDto.class)).toList();
     }
 
     @Override
-    public List<OnDutyDto> getStudentOnDuty(int regNo) {
+    public List<OnDutyDto> getStudentOnDuty(Long regNo) {
         StudentInfo foundStudent=studentRepository.findByRegNo(regNo).get();
         return foundStudent.getOnDutyEntities().stream().map((ond)->modelMapper.map(ond, OnDutyDto.class)).toList();
     }
 
     @Override
-    public List<LeaveOrOdRequestDto> getStudentLeaveRequests(int regNo) {
+    public List<LeaveOrOdRequestDto> getStudentLeaveRequests(Long regNo) {
         StudentInfo foundStudent=studentRepository.findByRegNo(regNo).get();
         return foundStudent.getLeaveOrOdRequests().stream().map((req)->modelMapper.map(req, LeaveOrOdRequestDto.class)).toList();
     }

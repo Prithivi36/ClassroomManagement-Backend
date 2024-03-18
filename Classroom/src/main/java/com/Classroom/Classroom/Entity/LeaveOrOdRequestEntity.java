@@ -20,8 +20,8 @@ public class LeaveOrOdRequestEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String type;
-    private int studentId;
-    private String StudentName;
+    private Long studentId;
+    private String studentName;
     private LocalDate date;
     private String reason;
     private Boolean status;
