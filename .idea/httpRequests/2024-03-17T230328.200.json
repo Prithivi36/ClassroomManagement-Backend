@@ -1,0 +1,178 @@
+[
+  {
+    "id": 1,
+    "regNo": 30,
+    "studentName": "Prithivi",
+    "branch": "AI&DS",
+    "phone": 8220812131,
+    "mail": "22ad036@drngpit.ac.in",
+    "fatherNumber": 9952518670,
+    "motherNumber": 9894075707,
+    "bloodGroup": "O+ve",
+    "cgpa": 8,
+    "studentConcern": 2,
+    "password": "$2a$12$yvNYdrU0ySytbLccRWxN2eRRw3Km4.G6NKOkEF60pXcdmh3RwrObC",
+    "onDutyEntities": [
+      {
+        "id": 1,
+        "date": "2024-03-16"
+      },
+      {
+        "id": 2,
+        "date": "2024-03-17"
+      }
+    ],
+    "absentList": [
+      {
+        "id": 1,
+        "date": "2024-03-16"
+      }
+    ],
+    "leaveOrOdRequests": []
+  },
+  {
+    "id": 2,
+    "regNo": 31,
+    "studentName": "Gag",
+    "branch": "AI&DS",
+    "phone": 8220812131,
+    "mail": "22ad036@drngpit.ac.in",
+    "fatherNumber": 9535421115,
+    "motherNumber": 9894075707,
+    "bloodGroup": "O+ve",
+    "cgpa": 8,
+    "studentConcern": 3,
+    "password": "$2a$12$yvNYdrU0ySytbLccRWxN2eRRw3Km4.G6NKOkEF60pXcdmh3RwrObC",
+    "onDutyEntities": [
+      {
+        "id": 1,
+        "date": "2024-03-16"
+      }
+    ],
+    "absentList": [],
+    "leaveOrOdRequests": [
+      {
+        "id": 10,
+        "type": "od",
+        "studentId": 31,
+        "date": "2024-03-27",
+        "reason": "Bit college",
+        "status": true,
+        "leaveRequestId": "2024-03-2731",
+        "studentName": "gag"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "regNo": 32,
+    "studentName": "Vis",
+    "branch": "AI&DS",
+    "phone": 8220812131,
+    "mail": "22ad036@drngpit.ac.in",
+    "fatherNumber": 9952518670,
+    "motherNumber": 9894075707,
+    "bloodGroup": "O+ve",
+    "cgpa": 8,
+    "studentConcern": 0,
+    "password": "$2a$12$yvNYdrU0ySytbLccRWxN2eRRw3Km4.G6NKOkEF60pXcdmh3RwrObC",
+    "onDutyEntities": [],
+    "absentList": [
+      {
+        "id": 1,
+        "date": "2024-03-16"
+      },
+      {
+        "id": 2,
+        "date": "2024-03-17"
+      }
+    ],
+    "leaveOrOdRequests": []
+  },
+  {
+    "id": 4,
+    "regNo": 33,
+    "studentName": "Gop",
+    "branch": "AI&DS",
+    "phone": 8220812131,
+    "mail": "22ad036@drngpit.ac.in",
+    "fatherNumber": 9952518670,
+    "motherNumber": 9894075707,
+    "bloodGroup": "O+ve",
+    "cgpa": 8,
+    "studentConcern": 1,
+    "password": "$2a$12$yvNYdrU0ySytbLccRWxN2eRRw3Km4.G6NKOkEF60pXcdmh3RwrObC",
+    "onDutyEntities": [
+      {
+        "id": 2,
+        "date": "2024-03-17"
+      }
+    ],
+    "absentList": [
+      {
+        "id": 1,
+        "date": "2024-03-16"
+      },
+      {
+        "id": 2,
+        "date": "2024-03-17"
+      }
+    ],
+    "leaveOrOdRequests": [
+      {
+        "id": 12,
+        "type": "od",
+        "studentId": 33,
+        "date": "2024-03-27",
+        "reason": "Bit college",
+        "status": true,
+        "leaveRequestId": "2024-03-2733",
+        "studentName": "Gop"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "regNo": 34,
+    "studentName": "Har",
+    "branch": "AI&DS",
+    "phone": 8220812131,
+    "mail": "22ad036@drngpit.ac.in",
+    "fatherNumber": 9952518670,
+    "motherNumber": 9894075707,
+    "bloodGroup": "O+ve",
+    "cgpa": 8,
+    "studentConcern": 2,
+    "password": "$2a$12$yvNYdrU0ySytbLccRWxN2eRRw3Km4.G6NKOkEF60pXcdmh3RwrObC",
+    "onDutyEntities": [
+      {
+        "id": 1,
+        "date": "2024-03-16"
+      }
+    ],
+    "absentList": [
+      {
+        "id": 2,
+        "date": "2024-03-17"
+      }
+    ],
+    "leaveOrOdRequests": []
+  },
+  {
+    "id": 6,
+    "regNo": 35,
+    "studentName": "Mdu",
+    "branch": "AI&DS",
+    "phone": 8220812131,
+    "mail": "22ad036@drngpit.ac.in",
+    "fatherNumber": 9952518670,
+    "motherNumber": 9894075707,
+    "bloodGroup": "O+ve",
+    "cgpa": 8,
+    "studentConcern": 0,
+    "password": "$2a$12$yvNYdrU0ySytbLccRWxN2eRRw3Km4.G6NKOkEF60pXcdmh3RwrObC",
+    "onDutyEntities": [],
+    "absentList": [],
+    "leaveOrOdRequests": []
+  }
+]
