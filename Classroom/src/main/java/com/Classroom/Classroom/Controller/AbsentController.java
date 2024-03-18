@@ -18,8 +18,8 @@ public class AbsentController {
     private AbsentService absentService;
 
     @PostMapping("/send")
-    public String studentAbsentMarkdown(@RequestBody ListDto ListDto){
-        List<Integer> reg=ListDto.getIncomingList();
+    public String studentAbsentMarkdown(@RequestBody ListDto<Long> ListDto){
+        List<Long> reg=ListDto.getIncomingList();
         return absentService.markDownAbsent(reg);
     }
 

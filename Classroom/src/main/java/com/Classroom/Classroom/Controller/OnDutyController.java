@@ -19,8 +19,8 @@ public class OnDutyController {
     private OnDutyService onDutyService;
 
     @PostMapping("/send")
-    public String onDutyMarkDown(@RequestBody  ListDto onDutyListDto){
-        List<Integer> onDutyList=onDutyListDto.getIncomingList();
+    public String onDutyMarkDown(@RequestBody  ListDto<Long> onDutyListDto){
+        List<Long> onDutyList=onDutyListDto.getIncomingList();
         return onDutyService.markDownOnDuty(onDutyList);
     }
     @GetMapping("on/{date}")

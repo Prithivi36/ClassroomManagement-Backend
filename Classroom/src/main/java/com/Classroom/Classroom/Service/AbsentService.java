@@ -12,5 +12,5 @@ public interface AbsentService {
     List<StudentAbsentDto> getAllAbsentDetails();
 
     List<StudentDto> getAbsentsOnDate(LocalDate specificDate);
-    String markDownAbsent(List<Integer> absenteesNumbers );
+    String markDownAbsent(List<Long> absenteesNumbers );
 }

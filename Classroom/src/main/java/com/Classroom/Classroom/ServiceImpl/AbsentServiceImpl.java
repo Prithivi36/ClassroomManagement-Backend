@@ -33,11 +33,11 @@ public class AbsentServiceImpl implements AbsentService {
     }
 
     @Override
-    public String markDownAbsent(List<Integer> absenteesNumbers) {
+    public String markDownAbsent(List<Long> absenteesNumbers) {
 
         LocalDate today=LocalDate.now();
 
-        for(int studentNumber : absenteesNumbers){
+        for(Long studentNumber : absenteesNumbers){
             StudentAbsent foundDate=studentAbsentRepo.findByDate(today).orElseGet(()->{
                 StudentAbsent newStudentAbsent=new StudentAbsent();
                 newStudentAbsent.setDate(today);

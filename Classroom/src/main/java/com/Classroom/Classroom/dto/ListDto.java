@@ -11,7 +11,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ListDto {
+public class ListDto<T> {
     //for Receiving List as Input
-    private List<Integer> incomingList;
+    private List<T> incomingList;
 }

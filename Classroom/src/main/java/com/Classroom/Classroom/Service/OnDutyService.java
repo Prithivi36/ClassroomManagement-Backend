@@ -11,5 +11,5 @@ import java.util.List;
 public interface OnDutyService {
     List<OnDutyDto> getAllOnDuty();
     List<StudentDto> getOnDutyOnSpecificDate(LocalDate specificDate);
-    String markDownOnDuty(List<Integer> onDutyNumbers );
+    String markDownOnDuty(List<Long> onDutyNumbers );
 }

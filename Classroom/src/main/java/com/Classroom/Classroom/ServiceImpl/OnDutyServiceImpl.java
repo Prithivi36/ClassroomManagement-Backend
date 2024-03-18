@@ -36,11 +36,11 @@ public class OnDutyServiceImpl implements OnDutyService {
     }
 
     @Override
-    public String markDownOnDuty(List<Integer> onDutyNumbers) {
+    public String markDownOnDuty(List<Long> onDutyNumbers) {
 
         LocalDate today=LocalDate.now();
 
-        for(int studentNumber : onDutyNumbers){
+        for(Long studentNumber : onDutyNumbers){
             OnDutyEntity foundDate=onDutyEntityRepo.findByDate(today).orElseGet(()->{
                OnDutyEntity newOnDuty=new OnDutyEntity();
                newOnDuty.setDate(today);
