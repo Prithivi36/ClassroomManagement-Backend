@@ -13,7 +13,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "studentDetail")
+@Table(name = "studentDetails")
 public class StudentInfo {
 
     @Id
@@ -33,19 +33,21 @@ public class StudentInfo {
 
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinTable(
-            joinColumns = @JoinColumn(referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(referencedColumnName = "id")
+            name = "studentOnduty",
+            joinColumns = @JoinColumn(name ="studentId", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name ="odId", referencedColumnName = "id")
     )
     private List<OnDutyEntity> onDutyEntities;
 
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinTable(
-            joinColumns = @JoinColumn(referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(referencedColumnName = "id")
+            name = "studentAbsent",
+            joinColumns = @JoinColumn(name ="studentId", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name ="absentId", referencedColumnName = "id")
     )
     private List<StudentAbsent> absentList;
 
     @OneToMany(cascade = CascadeType.ALL ,fetch = FetchType.EAGER)
-    @JoinColumn(referencedColumnName = "id")
+    @JoinColumn(name ="student", referencedColumnName = "id")
     private List<LeaveOrOdRequestEntity> leaveOrOdRequests;
 }

@@ -16,6 +16,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "onduty")
 public class OnDutyEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

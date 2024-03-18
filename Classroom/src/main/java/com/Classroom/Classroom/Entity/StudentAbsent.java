@@ -19,6 +19,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "absent")
 public class StudentAbsent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +29,5 @@ public class StudentAbsent {
     @ManyToMany(mappedBy = "absentList")
     @JsonIgnore
     private List<StudentInfo> studentInfos=new ArrayList<>();
-
-
 
 }
