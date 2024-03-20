@@ -25,6 +25,7 @@ public class StudentAbsent {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDate date;
+    private int hour;
 
     @ManyToMany(mappedBy = "absentList")
     @JsonIgnore

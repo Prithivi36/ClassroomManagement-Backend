@@ -21,6 +21,8 @@ public class StudentDto {
     private String branch;
     private Long phone;
     private String mail;
+    private String linkedin;
+    private String instagram;
     private Long fatherNumber;
     private Long motherNumber;
     private String bloodGroup;

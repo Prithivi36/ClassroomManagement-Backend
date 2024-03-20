@@ -17,5 +17,5 @@ import java.util.List;
 public class StudentAbsentDto {
     private Long id;
     private LocalDate date;
-
+    private int hour;
 }
