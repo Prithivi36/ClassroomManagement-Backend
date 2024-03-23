@@ -22,4 +22,7 @@ public interface StudentInfoService {
     List<OnDutyDto> getStudentOnDuty(Long regNo);
 
     List<LeaveOrOdRequestDto> getStudentLeaveRequests(Long regNo);
+
+    String increaseCount(Long regNo);
+    String decreaseCount(Long regNo);
 }

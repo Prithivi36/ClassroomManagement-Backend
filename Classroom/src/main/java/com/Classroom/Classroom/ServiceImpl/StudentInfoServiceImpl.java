@@ -55,4 +55,20 @@ public class StudentInfoServiceImpl implements StudentInfoService {
         StudentInfo foundStudent=studentRepository.findByRegNo(regNo).get();
         return foundStudent.getLeaveOrOdRequests().stream().map((req)->modelMapper.map(req, LeaveOrOdRequestDto.class)).toList();
     }
+
+    @Override
+    public String increaseCount(Long regNo) {
+        StudentInfo foundStudent= studentRepository.findByRegNo(regNo).get();
+        foundStudent.setStudentConcern(foundStudent.getStudentConcern()+1);
+        studentRepository.save(foundStudent);
+        return "Success";
+    }
+
+    @Override
+    public String decreaseCount(Long regNo) {
+        StudentInfo foundStudent= studentRepository.findByRegNo(regNo).get();
+        foundStudent.setStudentConcern(foundStudent.getStudentConcern()-1);
+        studentRepository.save(foundStudent);
+        return "Success";
+    }
 }

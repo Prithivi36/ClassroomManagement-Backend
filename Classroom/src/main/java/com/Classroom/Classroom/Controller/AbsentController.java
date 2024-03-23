@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 @CrossOrigin("*")
 @RestController
@@ -26,5 +27,10 @@ public class AbsentController {
     @GetMapping("on/{date}")
     public List<StudentDto> getStudentsOnDate(@PathVariable  LocalDate date){
         return absentService.getAbsentsOnDate(date);
+    }
+
+    @GetMapping("on/{date}/{hour}")
+    public List<StudentDto> getStudentsOnDateHour(@PathVariable  LocalDate date,@PathVariable int hour){
+        return absentService.getAbsentOnDateAndHour(date,hour);
     }
 }

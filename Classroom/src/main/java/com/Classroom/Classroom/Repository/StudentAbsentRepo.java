@@ -7,11 +7,12 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface StudentAbsentRepo extends JpaRepository<StudentAbsent,Long> {
-    Optional<StudentAbsent> findByDate(LocalDate date);
+    Optional<List<StudentAbsent>> findByDate(LocalDate date);
 
     Optional<StudentAbsent> findByDateAndHour(LocalDate date, int time);
 }

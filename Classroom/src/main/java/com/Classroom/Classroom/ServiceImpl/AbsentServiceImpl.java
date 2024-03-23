@@ -12,7 +12,11 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -28,11 +32,22 @@ public class AbsentServiceImpl implements AbsentService {
 
     @Override
     public List<StudentDto> getAbsentsOnDate(LocalDate specificDate) {
+        List<StudentAbsent> absentOnDate = studentAbsentRepo.findByDate(specificDate).get();
 
-        StudentAbsent absentOnDate=studentAbsentRepo.findByDate(specificDate).get();
-        List<StudentInfo> foundStudents=absentOnDate.getStudentInfos();
-        return foundStudents.stream().map((std)->modelMapper.map(std, StudentDto.class)).toList();
+            Set<StudentInfo> foundStudents = absentOnDate.stream()
+                    .flatMap(absent -> absent.getStudentInfos().stream())
+                    .collect(Collectors.toSet());
 
+            return foundStudents.stream()
+                    .map(studentInfo -> modelMapper.map(studentInfo, StudentDto.class))
+                    .toList();
+    }
+
+    @Override
+    public List<StudentDto> getAbsentOnDateAndHour(LocalDate specificDate, int hour) {
+        StudentAbsent absentDateHour=studentAbsentRepo.findByDateAndHour(specificDate, hour).get();
+        List<StudentInfo> foundAbsents=absentDateHour.getStudentInfos();
+        return foundAbsents.stream().map((studentInfo -> modelMapper.map(studentInfo,StudentDto.class))).toList();
     }
 
 

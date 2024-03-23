@@ -34,4 +34,9 @@ public class LeaveOrOdController {
     public String acceptOrReject(@PathVariable Long id){
         return leaveOrOdService.acceptOrDeclineRequest(id);
     }
+
+    @GetMapping("/get/{id}")
+    public List<LeaveOrOdRequestDto> getRequestByRegNo(@PathVariable Long id){
+        return leaveOrOdService.getLeaveRequestByRegNo(id);
+    }
 }

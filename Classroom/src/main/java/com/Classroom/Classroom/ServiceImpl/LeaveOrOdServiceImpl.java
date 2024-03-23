@@ -52,4 +52,10 @@ public class LeaveOrOdServiceImpl implements LeaveOrOdService {
         leaveOrOdRepo.save(leaveOrOdRequestEntity);
         return "Toggled";
     }
+
+    @Override
+    public List<LeaveOrOdRequestDto> getLeaveRequestByRegNo(Long regNo) {
+        List<LeaveOrOdRequestEntity> requests=leaveOrOdRepo.findByStudentId(regNo).get();
+        return requests.stream().map((req)->modelMapper.map(req,LeaveOrOdRequestDto.class)).toList();
+    }
 }

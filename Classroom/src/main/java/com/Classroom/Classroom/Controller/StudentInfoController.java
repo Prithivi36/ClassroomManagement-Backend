@@ -23,6 +23,7 @@ public class StudentInfoController {
         return studentInfoService.registerNewStudent(studentDto);
     }
 
+    //For Dev Test
     @PostMapping("/newList")
     public String getMultiple(@RequestBody List<StudentDto> studentDtos){
         for(StudentDto i : studentDtos){
@@ -48,5 +49,14 @@ public class StudentInfoController {
     @GetMapping("/od/{regNo}")
     public List<OnDutyDto> getStudOnDuty(@PathVariable("regNo") Long regNo){
         return studentInfoService.getStudentOnDuty(regNo);
+    }
+
+    @PatchMapping("/merit/inc/{regNo}")
+    public String increaseMerit(@PathVariable("regNo") Long regNo){
+        return studentInfoService.increaseCount(regNo);
+    }
+    @PatchMapping("/merit/dec/{regNo}")
+    public String decreaseMerit(@PathVariable("regNo") Long regNo){
+        return studentInfoService.decreaseCount(regNo);
     }
 }

@@ -1,6 +1,7 @@
 package com.Classroom.Classroom.Service;
 
 import com.Classroom.Classroom.dto.LeaveOrOdRequestDto;
+import com.Classroom.Classroom.dto.StudentDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,6 +13,8 @@ public interface LeaveOrOdService {
     List<LeaveOrOdRequestDto> getAllLeaveRequest();
     String deleteRequest(Long reqestId);
     String acceptOrDeclineRequest(Long requestId);
+
+    List<LeaveOrOdRequestDto> getLeaveRequestByRegNo(Long regNo);
 
 
 }
