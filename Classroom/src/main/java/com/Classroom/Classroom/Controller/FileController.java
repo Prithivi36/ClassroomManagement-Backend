@@ -4,6 +4,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
@@ -18,6 +19,7 @@ public class FileController {
 
     private String devPath="C:/Users/Prithivi P/Desktop/New folder";
 
+    @PreAuthorize("hasAnyRole('TEACHER','REP')")
     @PostMapping("/upload/{sem}/{sub}")
     public String handleFileUpload(@RequestParam("file") MultipartFile file,
                                    @PathVariable String sem,
@@ -36,6 +38,7 @@ public class FileController {
             return "Failed to upload file: " + e.getMessage();
         }
     }
+    @PreAuthorize("permitAll()")
     @GetMapping("/files/{sem}/{sub}")
     public List<String> listFiles(@PathVariable String sem,@PathVariable String sub) {
         List<String> fileList = new ArrayList<>();
@@ -54,6 +57,7 @@ public class FileController {
         }
         return fileList;
     }
+    @PreAuthorize("permitAll()")
     @GetMapping("/download/{sem}/{sub}/{fileName:.+}")
     public ResponseEntity<byte[]> downloadFile(@PathVariable String fileName ,
                                                @PathVariable String sem,
