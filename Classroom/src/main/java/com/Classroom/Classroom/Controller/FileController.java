@@ -12,8 +12,11 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
+@CrossOrigin("*")
 @RestController
 public class FileController {
+
+    private String devPath="C:/Users/Prithivi P/Desktop/New folder";
 
     @PostMapping("/upload/{sem}/{sub}")
     public String handleFileUpload(@RequestParam("file") MultipartFile file,
@@ -25,7 +28,7 @@ public class FileController {
         try {
             String uploadDir = "/data2/materials/"+sem+"/"+sub;
             String fileName = file.getOriginalFilename();
-            String filePath = uploadDir + File.separator + fileName;
+            String filePath = devPath + File.separator + fileName;
             File dest = new File(filePath);
             file.transferTo(dest);
             return "File uploaded successfully!";
@@ -37,7 +40,7 @@ public class FileController {
     public List<String> listFiles(@PathVariable String sem,@PathVariable String sub) {
         List<String> fileList = new ArrayList<>();
         String directoryPath = "/data2/materials/"+sem+"/"+sub;
-        File directory = new File(directoryPath);
+        File directory = new File(devPath);
 
         if (directory.exists() && directory.isDirectory()) {
             File[] files = directory.listFiles();
@@ -56,7 +59,7 @@ public class FileController {
                                                @PathVariable String sem,
                                                @PathVariable String sub) {
         String directoryPath = "/data2/materials/"+sem+"/"+sub;
-        File file = new File(directoryPath + File.separator + fileName);
+        File file = new File(devPath + File.separator + fileName);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
