@@ -9,6 +9,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -18,6 +19,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @AllArgsConstructor
+@EnableMethodSecurity
 public class SecurityConfigurstion {
     private UserDetailsService userDetailsService;
 
@@ -33,7 +35,7 @@ public class SecurityConfigurstion {
     SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
         httpSecurity.csrf().disable()
                 .authorizeHttpRequests((authorizer)->{
-                    authorizer.requestMatchers(HttpMethod.GET,"/**").hasRole("ADMIN");
+//                    authorizer.requestMatchers(HttpMethod.GET,"/**").hasRole("ADMIN");
                     authorizer.requestMatchers(HttpMethod.POST,"/auth/**").permitAll();
                     authorizer.anyRequest().authenticated();
 
