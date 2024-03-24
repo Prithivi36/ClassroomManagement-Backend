@@ -1,9 +1,6 @@
 package com.Classroom.Classroom.Service;
 
-import com.Classroom.Classroom.dto.LeaveOrOdRequestDto;
-import com.Classroom.Classroom.dto.OnDutyDto;
-import com.Classroom.Classroom.dto.StudentAbsentDto;
-import com.Classroom.Classroom.dto.StudentDto;
+import com.Classroom.Classroom.dto.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,4 +22,6 @@ public interface StudentInfoService {
 
     String increaseCount(Long regNo);
     String decreaseCount(Long regNo);
+
+    String addSkills(String skill ,Long student);
 }

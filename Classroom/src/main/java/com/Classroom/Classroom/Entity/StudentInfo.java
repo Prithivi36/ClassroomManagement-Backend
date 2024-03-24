@@ -35,6 +35,14 @@ public class StudentInfo {
 
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinTable(
+            name = "SkillsAndStudent",
+            joinColumns = @JoinColumn(name = "student", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "skillId",referencedColumnName = "id")
+    )
+    private List<StudentSkills> studentSkills;
+
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JoinTable(
             name = "studentOnduty",
             joinColumns = @JoinColumn(name ="studentId", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name ="odId", referencedColumnName = "id")
@@ -52,4 +60,6 @@ public class StudentInfo {
     @OneToMany(cascade = CascadeType.ALL ,fetch = FetchType.EAGER)
     @JoinColumn(name ="student", referencedColumnName = "id")
     private List<LeaveOrOdRequestEntity> leaveOrOdRequests;
+
+
 }

@@ -51,6 +51,11 @@ public class StudentInfoController {
         return studentInfoService.getStudentOnDuty(regNo);
     }
 
+    @PostMapping("/skill/add/{id}/{skills}")
+    public String postSkills(@PathVariable Long id,@PathVariable String skills){
+        return studentInfoService.addSkills(skills,id);
+    }
+
     @PatchMapping("/merit/inc/{regNo}")
     public String increaseMerit(@PathVariable("regNo") Long regNo){
         return studentInfoService.increaseCount(regNo);

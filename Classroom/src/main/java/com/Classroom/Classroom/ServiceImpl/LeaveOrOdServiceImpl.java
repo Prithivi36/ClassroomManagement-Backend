@@ -9,6 +9,8 @@ import com.Classroom.Classroom.dto.LeaveOrOdRequestDto;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -54,8 +56,8 @@ public class LeaveOrOdServiceImpl implements LeaveOrOdService {
     }
 
     @Override
-    public List<LeaveOrOdRequestDto> getLeaveRequestByRegNo(Long regNo) {
-        List<LeaveOrOdRequestEntity> requests=leaveOrOdRepo.findByStudentId(regNo).get();
+    public List<LeaveOrOdRequestDto> getLeaveRequestByRegNo(Long regNo, LocalDate date) {
+        List<LeaveOrOdRequestEntity> requests=leaveOrOdRepo.findByStudentIdAndAndDate(regNo,date).get();
         return requests.stream().map((req)->modelMapper.map(req,LeaveOrOdRequestDto.class)).toList();
     }
 }

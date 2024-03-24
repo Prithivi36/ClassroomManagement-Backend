@@ -5,6 +5,7 @@ import com.Classroom.Classroom.dto.LeaveOrOdRequestDto;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @CrossOrigin("*")
@@ -35,8 +36,8 @@ public class LeaveOrOdController {
         return leaveOrOdService.acceptOrDeclineRequest(id);
     }
 
-    @GetMapping("/get/{id}")
-    public List<LeaveOrOdRequestDto> getRequestByRegNo(@PathVariable Long id){
-        return leaveOrOdService.getLeaveRequestByRegNo(id);
+    @GetMapping("/get/{id}/{date}")
+    public List<LeaveOrOdRequestDto> getRequestByRegNo(@PathVariable Long id , @PathVariable LocalDate date){
+        return leaveOrOdService.getLeaveRequestByRegNo(id,date);
     }
 }

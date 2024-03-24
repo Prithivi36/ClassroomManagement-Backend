@@ -13,5 +13,5 @@ import java.util.Optional;
 public interface LeaveOrOdRepo extends JpaRepository<LeaveOrOdRequestEntity,Long> {
     Optional<LeaveOrOdRequestEntity> findByLeaveRequestId(String uniq);
 
-    Optional<List<LeaveOrOdRequestEntity>> findByStudentId(Long regNo);
+    Optional<List<LeaveOrOdRequestEntity>> findByStudentIdAndAndDate(Long regNo, LocalDate date);
 }

@@ -1,6 +1,8 @@
 package com.Classroom.Classroom.ServiceImpl;
 
 import com.Classroom.Classroom.Entity.StudentInfo;
+import com.Classroom.Classroom.Entity.StudentSkills;
+import com.Classroom.Classroom.Repository.SkillsRepository;
 import com.Classroom.Classroom.Repository.StudentRepository;
 import com.Classroom.Classroom.Service.StudentInfoService;
 import com.Classroom.Classroom.dto.LeaveOrOdRequestDto;
@@ -19,6 +21,7 @@ public class StudentInfoServiceImpl implements StudentInfoService {
 
     private StudentRepository studentRepository;
     private ModelMapper modelMapper;
+    private SkillsRepository skillsRepository;
 
     @Override
     public String registerNewStudent(StudentDto studentData) {
@@ -68,6 +71,21 @@ public class StudentInfoServiceImpl implements StudentInfoService {
     public String decreaseCount(Long regNo) {
         StudentInfo foundStudent= studentRepository.findByRegNo(regNo).get();
         foundStudent.setStudentConcern(foundStudent.getStudentConcern()-1);
+        studentRepository.save(foundStudent);
+        return "Success";
+    }
+
+    @Override
+    public String addSkills(String skill,Long student) {
+        StudentSkills skillsFound=skillsRepository.findBySkill(skill).orElseGet(()->{
+            StudentSkills skillsCreated=new StudentSkills();
+            skillsCreated.setSkill(skill);
+            return skillsCreated;
+        });
+        skillsRepository.save(skillsFound);
+
+        StudentInfo foundStudent=studentRepository.findByRegNo(student).get();
+        foundStudent.getStudentSkills().add(skillsFound);
         studentRepository.save(foundStudent);
         return "Success";
     }
