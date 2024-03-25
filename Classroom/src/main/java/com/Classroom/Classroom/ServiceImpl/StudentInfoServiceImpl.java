@@ -2,6 +2,7 @@ package com.Classroom.Classroom.ServiceImpl;
 
 import com.Classroom.Classroom.Entity.StudentInfo;
 import com.Classroom.Classroom.Entity.StudentSkills;
+import com.Classroom.Classroom.Exception.APIException;
 import com.Classroom.Classroom.Repository.SkillsRepository;
 import com.Classroom.Classroom.Repository.StudentRepository;
 import com.Classroom.Classroom.Service.StudentInfoService;
@@ -11,6 +12,7 @@ import com.Classroom.Classroom.dto.StudentAbsentDto;
 import com.Classroom.Classroom.dto.StudentDto;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,7 +39,7 @@ public class StudentInfoServiceImpl implements StudentInfoService {
 
     @Override
     public StudentDto getSpecificStudent(Long regNo) {
-        StudentInfo foundStudent= studentRepository.findByRegNo(regNo).get();
+        StudentInfo foundStudent= studentRepository.findByRegNo(regNo).orElseThrow(()->new APIException(HttpStatus.NOT_FOUND,"User Not Found"));
         return modelMapper.map(foundStudent,StudentDto.class);
     }
 

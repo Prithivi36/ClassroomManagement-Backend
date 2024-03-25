@@ -36,6 +36,7 @@ public class SecurityConfigurstion {
         httpSecurity.csrf().disable()
                 .authorizeHttpRequests((authorizer)->{
 //                    authorizer.requestMatchers(HttpMethod.GET,"/**").hasRole("ADMIN");
+
                     authorizer.requestMatchers(HttpMethod.POST,"/auth/**").permitAll();
                     authorizer.anyRequest().authenticated();
 
