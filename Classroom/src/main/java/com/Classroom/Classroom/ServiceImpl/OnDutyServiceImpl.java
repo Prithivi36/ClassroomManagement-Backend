@@ -3,6 +3,7 @@ package com.Classroom.Classroom.ServiceImpl;
 import com.Classroom.Classroom.Entity.OnDutyEntity;
 import com.Classroom.Classroom.Entity.StudentAbsent;
 import com.Classroom.Classroom.Entity.StudentInfo;
+import com.Classroom.Classroom.Exception.APIException;
 import com.Classroom.Classroom.Repository.OnDutyEntityRepo;
 import com.Classroom.Classroom.Repository.StudentRepository;
 import com.Classroom.Classroom.Service.OnDutyService;
@@ -11,6 +12,7 @@ import com.Classroom.Classroom.dto.StudentAbsentDto;
 import com.Classroom.Classroom.dto.StudentDto;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -30,7 +32,7 @@ public class OnDutyServiceImpl implements OnDutyService {
 
     @Override
     public List<StudentDto> getOnDutyOnSpecificDate(LocalDate specificDate) {
-        OnDutyEntity OnDutyOnDate=onDutyEntityRepo.findByDate(specificDate).get();
+        OnDutyEntity OnDutyOnDate=onDutyEntityRepo.findByDate(specificDate).orElseThrow(()->new APIException(HttpStatus.NOT_FOUND,"No On Duty on this date"));
         List<StudentInfo> foundStudents=OnDutyOnDate.getOnDutyMembers();
         return foundStudents.stream().map((std)->modelMapper.map(std, StudentDto.class)).toList();
     }
@@ -47,7 +49,7 @@ public class OnDutyServiceImpl implements OnDutyService {
                return newOnDuty;
             });
 
-            StudentInfo foundStudent=studentRepository.findByRegNo(studentNumber).get();
+            StudentInfo foundStudent=studentRepository.findByRegNo(studentNumber).orElseThrow(()->new APIException(HttpStatus.NOT_FOUND,"Student Not Found"));
             foundStudent.setId(foundStudent.getId());
             foundStudent.getOnDutyEntities().add(foundDate);
             studentRepository.save(foundStudent);

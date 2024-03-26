@@ -19,7 +19,7 @@ public class OnDutyController {
 
     private OnDutyService onDutyService;
 
-    @PreAuthorize("hasAnyRole('STUDENT','REP')")
+    @PreAuthorize("hasAnyRole('REP','TEACHER')")
     @PostMapping("/send")
     public String onDutyMarkDown(@RequestBody  ListDto<Long> onDutyListDto){
         List<Long> onDutyList=onDutyListDto.getIncomingList();

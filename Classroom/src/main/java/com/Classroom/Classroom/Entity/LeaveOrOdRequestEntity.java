@@ -26,6 +26,7 @@ public class LeaveOrOdRequestEntity {
     private String reason;
     private Boolean status;
     private String leaveRequestId;
+    private Boolean denied;
 
 
 }

@@ -17,7 +17,6 @@ import java.util.List;
 @RestController
 public class FileController {
 
-    private String devPath="C:/Users/Prithivi P/Desktop/New folder";
 
     @PreAuthorize("hasAnyRole('TEACHER','REP')")
     @PostMapping("/upload/{sem}/{sub}")
@@ -29,8 +28,14 @@ public class FileController {
         }
         try {
             String uploadDir = "/data2/materials/"+sem+"/"+sub;
+            File uploadDirectory = new File(uploadDir);
+            if (!uploadDirectory.exists()) {
+                if (!uploadDirectory.mkdirs()) {
+                    return "Failed to create directories.";
+                }
+            }
             String fileName = file.getOriginalFilename();
-            String filePath = devPath + File.separator + fileName;
+            String filePath = uploadDir + File.separator + fileName;
             File dest = new File(filePath);
             file.transferTo(dest);
             return "File uploaded successfully!";
@@ -38,12 +43,12 @@ public class FileController {
             return "Failed to upload file: " + e.getMessage();
         }
     }
-    @PreAuthorize("permitAll()")
+    @PreAuthorize("hasAnyRole('STUDENT','TEACHER','REP')")
     @GetMapping("/files/{sem}/{sub}")
     public List<String> listFiles(@PathVariable String sem,@PathVariable String sub) {
         List<String> fileList = new ArrayList<>();
         String directoryPath = "/data2/materials/"+sem+"/"+sub;
-        File directory = new File(devPath);
+        File directory = new File(directoryPath);
 
         if (directory.exists() && directory.isDirectory()) {
             File[] files = directory.listFiles();
@@ -57,13 +62,13 @@ public class FileController {
         }
         return fileList;
     }
-    @PreAuthorize("permitAll()")
+    @PreAuthorize("hasAnyRole('STUDENT','TEACHER','REP')")
     @GetMapping("/download/{sem}/{sub}/{fileName:.+}")
     public ResponseEntity<byte[]> downloadFile(@PathVariable String fileName ,
                                                @PathVariable String sem,
                                                @PathVariable String sub) {
         String directoryPath = "/data2/materials/"+sem+"/"+sub;
-        File file = new File(devPath + File.separator + fileName);
+        File file = new File(directoryPath + File.separator + fileName);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);

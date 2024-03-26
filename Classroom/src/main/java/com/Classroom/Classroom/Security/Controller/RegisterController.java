@@ -24,4 +24,10 @@ public class RegisterController {
     public String newTeacherRegistration(@RequestBody RequestDto requestDto){
         return registerService.registerNewTeacher(requestDto);
     }
+
+    @PreAuthorize("hasRole('TEACHER')")
+    @PutMapping("/rep/{id}")
+    public String makeStudentRep(@PathVariable String id){
+        return registerService.makeRep(id);
+    }
 }

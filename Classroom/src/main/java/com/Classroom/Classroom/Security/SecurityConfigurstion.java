@@ -38,6 +38,8 @@ public class SecurityConfigurstion {
 //                    authorizer.requestMatchers(HttpMethod.GET,"/**").hasRole("ADMIN");
 
                     authorizer.requestMatchers(HttpMethod.POST,"/auth/**").permitAll();
+                    authorizer.requestMatchers(HttpMethod.POST,"/student/new").permitAll();
+                    authorizer.requestMatchers(HttpMethod.GET,"/download/**").permitAll();
                     authorizer.anyRequest().authenticated();
 
                 }).httpBasic(Customizer.withDefaults());

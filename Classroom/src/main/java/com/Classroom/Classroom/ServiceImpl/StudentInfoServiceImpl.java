@@ -39,40 +39,49 @@ public class StudentInfoServiceImpl implements StudentInfoService {
 
     @Override
     public StudentDto getSpecificStudent(Long regNo) {
-        StudentInfo foundStudent= studentRepository.findByRegNo(regNo).orElseThrow(()->new APIException(HttpStatus.NOT_FOUND,"User Not Found"));
+        StudentInfo foundStudent= studentRepository.findByRegNo(regNo).orElseThrow(()->new APIException(HttpStatus.NOT_FOUND,"Student Not Found"));
         return modelMapper.map(foundStudent,StudentDto.class);
     }
 
     @Override
     public List<StudentAbsentDto> getStudentAbsent(Long regNo) {
-        StudentInfo foundStudent=studentRepository.findByRegNo(regNo).get();
+        StudentInfo foundStudent=studentRepository.findByRegNo(regNo).orElseThrow(()->new APIException(HttpStatus.NOT_FOUND,"Student Not Found"));
         return foundStudent.getAbsentList().stream().map((abs)->modelMapper.map(abs,StudentAbsentDto.class)).toList();
     }
 
     @Override
     public List<OnDutyDto> getStudentOnDuty(Long regNo) {
-        StudentInfo foundStudent=studentRepository.findByRegNo(regNo).get();
+        StudentInfo foundStudent=studentRepository.findByRegNo(regNo).orElseThrow(()->new APIException(HttpStatus.NOT_FOUND,"Student Not Found"));
         return foundStudent.getOnDutyEntities().stream().map((ond)->modelMapper.map(ond, OnDutyDto.class)).toList();
     }
 
     @Override
     public List<LeaveOrOdRequestDto> getStudentLeaveRequests(Long regNo) {
-        StudentInfo foundStudent=studentRepository.findByRegNo(regNo).get();
+        StudentInfo foundStudent=studentRepository.findByRegNo(regNo).orElseThrow(()->new APIException(HttpStatus.NOT_FOUND,"Student Not Found"));
         return foundStudent.getLeaveOrOdRequests().stream().map((req)->modelMapper.map(req, LeaveOrOdRequestDto.class)).toList();
     }
 
     @Override
     public String increaseCount(Long regNo) {
-        StudentInfo foundStudent= studentRepository.findByRegNo(regNo).get();
-        foundStudent.setStudentConcern(foundStudent.getStudentConcern()+1);
+        StudentInfo foundStudent= studentRepository.findByRegNo(regNo).orElseThrow(()->new APIException(HttpStatus.NOT_FOUND,"Student Not Found"));
+        if (foundStudent.getStudentConcern()<5){
+        foundStudent.setStudentConcern(foundStudent.getStudentConcern()+1);}
+        else{
+            throw new APIException(HttpStatus.BAD_REQUEST,"Reached Maximum");
+        }
         studentRepository.save(foundStudent);
         return "Success";
     }
 
     @Override
     public String decreaseCount(Long regNo) {
-        StudentInfo foundStudent= studentRepository.findByRegNo(regNo).get();
-        foundStudent.setStudentConcern(foundStudent.getStudentConcern()-1);
+        StudentInfo foundStudent= studentRepository.findByRegNo(regNo).orElseThrow(()->new APIException(HttpStatus.NOT_FOUND,"Student Not Found"));
+        if(foundStudent.getStudentConcern()>0){
+            foundStudent.setStudentConcern(foundStudent.getStudentConcern()-1);
+        }
+        else {
+            throw new APIException(HttpStatus.BAD_REQUEST,"Cannot reduce Further");
+        }
         studentRepository.save(foundStudent);
         return "Success";
     }
@@ -86,7 +95,7 @@ public class StudentInfoServiceImpl implements StudentInfoService {
         });
         skillsRepository.save(skillsFound);
 
-        StudentInfo foundStudent=studentRepository.findByRegNo(student).get();
+        StudentInfo foundStudent=studentRepository.findByRegNo(student).orElseThrow(()->new APIException(HttpStatus.NOT_FOUND,"Student Not Found"));
         foundStudent.getStudentSkills().add(skillsFound);
         studentRepository.save(foundStudent);
         return "Success";

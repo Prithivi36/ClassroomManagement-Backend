@@ -29,7 +29,7 @@ public class StudentInfo {
     private Long fatherNumber;
     private Long motherNumber;
     private String bloodGroup;
-    private int cgpa;
+    private double  cgpa;
     private int studentConcern;
     private String password;
 

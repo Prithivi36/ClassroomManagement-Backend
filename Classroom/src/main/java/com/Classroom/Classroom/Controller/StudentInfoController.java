@@ -34,7 +34,7 @@ public class StudentInfoController {
         return "Success";
     }
 
-    @PreAuthorize("hasRole('TEACHER')")
+    @PreAuthorize("hasAnyRole('TEACHER','REP')")
     @GetMapping("/getAll")
     public List<StudentDto> grtAllStudent(){
         return studentInfoService.getAllStudentsInfo();

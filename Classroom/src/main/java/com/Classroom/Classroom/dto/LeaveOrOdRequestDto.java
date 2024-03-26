@@ -20,5 +20,6 @@ public class LeaveOrOdRequestDto {
     private String reason;
     private Boolean status;
     private String leaveRequestsId;
+    private Boolean denied;
 
 }
