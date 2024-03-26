@@ -2,6 +2,7 @@ package com.Classroom.Classroom.ServiceImpl;
 
 import com.Classroom.Classroom.Entity.StudentAbsent;
 import com.Classroom.Classroom.Entity.StudentInfo;
+import com.Classroom.Classroom.Exception.APIException;
 import com.Classroom.Classroom.Repository.StudentAbsentRepo;
 import com.Classroom.Classroom.Repository.StudentRepository;
 import com.Classroom.Classroom.Service.AbsentService;
@@ -9,6 +10,7 @@ import com.Classroom.Classroom.dto.StudentAbsentDto;
 import com.Classroom.Classroom.dto.StudentDto;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -32,7 +34,7 @@ public class AbsentServiceImpl implements AbsentService {
 
     @Override
     public List<StudentDto> getAbsentsOnDate(LocalDate specificDate) {
-        List<StudentAbsent> absentOnDate = studentAbsentRepo.findByDate(specificDate).get();
+        List<StudentAbsent> absentOnDate = studentAbsentRepo.findByDate(specificDate).orElseThrow(()->new APIException(HttpStatus.NOT_FOUND,"Absents Not Found on this date"));
 
             Set<StudentInfo> foundStudents = absentOnDate.stream()
                     .flatMap(absent -> absent.getStudentInfos().stream())
@@ -45,7 +47,7 @@ public class AbsentServiceImpl implements AbsentService {
 
     @Override
     public List<StudentDto> getAbsentOnDateAndHour(LocalDate specificDate, int hour) {
-        StudentAbsent absentDateHour=studentAbsentRepo.findByDateAndHour(specificDate, hour).get();
+        StudentAbsent absentDateHour=studentAbsentRepo.findByDateAndHour(specificDate, hour).orElseThrow(()->new APIException(HttpStatus.NOT_FOUND,"Absent Not Found"));
         List<StudentInfo> foundAbsents=absentDateHour.getStudentInfos();
         return foundAbsents.stream().map((studentInfo -> modelMapper.map(studentInfo,StudentDto.class))).toList();
     }
@@ -87,7 +89,7 @@ public class AbsentServiceImpl implements AbsentService {
                 return newStudentAbsent;
             });
 
-            StudentInfo foundStudent=studentRepository.findByRegNo(studentNumber).get();
+            StudentInfo foundStudent=studentRepository.findByRegNo(studentNumber).orElseThrow(()->new APIException(HttpStatus.NOT_FOUND,"Student Not Found"));
             foundStudent.getAbsentList().add(foundDate);
             studentRepository.save(foundStudent);
 
