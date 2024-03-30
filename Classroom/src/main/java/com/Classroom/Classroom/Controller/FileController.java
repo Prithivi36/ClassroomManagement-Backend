@@ -43,7 +43,6 @@ public class FileController {
             return "Failed to upload file: " + e.getMessage();
         }
     }
-    @PreAuthorize("hasAnyRole('STUDENT','TEACHER','REP')")
     @GetMapping("/files/{sem}/{sub}")
     public List<String> listFiles(@PathVariable String sem,@PathVariable String sub) {
         List<String> fileList = new ArrayList<>();
@@ -62,7 +61,6 @@ public class FileController {
         }
         return fileList;
     }
-    @PreAuthorize("hasAnyRole('STUDENT','TEACHER','REP')")
     @GetMapping("/download/{sem}/{sub}/{fileName:.+}")
     public ResponseEntity<byte[]> downloadFile(@PathVariable String fileName ,
                                                @PathVariable String sem,
@@ -80,6 +78,26 @@ public class FileController {
         } catch (IOException e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @PreAuthorize("hasAnyRole('TEACHER','REP')")
+    @DeleteMapping("/delete/{sem}/{sub}/{fileName:.+}")
+    public ResponseEntity<String> deleteFile(@PathVariable String fileName,
+                                             @PathVariable String sem,
+                                             @PathVariable String sub) {
+        String directoryPath = "/data2/materials/" + sem + "/" + sub;
+        File file = new File(directoryPath + File.separator + fileName);
+
+        if (file.exists()) {
+            if (file.delete()) {
+                return ResponseEntity.ok("File " + fileName + " deleted successfully!");
+            } else {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                        .body("Failed to delete file " + fileName);
+            }
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("File " + fileName + " not found");
         }
     }
 }
