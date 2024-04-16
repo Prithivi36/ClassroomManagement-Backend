@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="dataSourceStorageLocal" created-in="IU-233.15026.9">
+  <component name="dataSourceStorageLocal" created-in="IU-241.14494.240">
     <data-source name="classroom@localhost" uuid="4c104a33-8a1a-4756-b18b-38ddbe38da48">
       <database-info product="MySQL" version="8.2.0" jdbc-version="4.2" driver-name="MySQL Connector/J" driver-version="mysql-connector-j-8.2.0 (Revision: 06a1f724497fd81c6a659131fda822c9e5085b6c)" dbms="MYSQL" exact-version="8.2.0" exact-driver-version="8.2">
         <extra-name-characters>#@</extra-name-characters>
@@ -15,18 +15,17 @@
         </introspection-scope>
       </schema-mapping>
     </data-source>
-    <data-source name="EC2 RDS" uuid="2c1767cd-c92e-4c3f-9ac0-62d8d05997f6">
+    <data-source name="VCR Backend Database" uuid="3558d05f-4bde-46ba-a0b7-dbad947f2dbe">
       <database-info product="MySQL" version="8.3.0" jdbc-version="4.2" driver-name="MySQL Connector/J" driver-version="mysql-connector-j-8.2.0 (Revision: 06a1f724497fd81c6a659131fda822c9e5085b6c)" dbms="MYSQL" exact-version="8.3.0" exact-driver-version="8.2">
         <extra-name-characters>#@</extra-name-characters>
         <identifier-quote-string>`</identifier-quote-string>
-        <jdbc-catalog-is-schema>true</jdbc-catalog-is-schema>
       </database-info>
       <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact" />
       <secret-storage>master_key</secret-storage>
       <user-name>root</user-name>
       <schema-mapping>
         <introspection-scope>
-          <node kind="schema" qname="@" />
+          <node kind="schema" negative="1" />
         </introspection-scope>
       </schema-mapping>
     </data-source>

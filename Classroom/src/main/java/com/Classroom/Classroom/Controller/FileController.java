@@ -27,7 +27,7 @@ public class FileController {
             return "Please select a file to upload.";
         }
         try {
-            String uploadDir = "/data2/materials/"+sem+"/"+sub;
+            String uploadDir = "/home/ec2-user/materials/"+sem+"/"+sub;
             File uploadDirectory = new File(uploadDir);
             if (!uploadDirectory.exists()) {
                 if (!uploadDirectory.mkdirs()) {
@@ -46,7 +46,7 @@ public class FileController {
     @GetMapping("/files/{sem}/{sub}")
     public List<String> listFiles(@PathVariable String sem,@PathVariable String sub) {
         List<String> fileList = new ArrayList<>();
-        String directoryPath = "/data2/materials/"+sem+"/"+sub;
+        String directoryPath = "/home/ec2-user/materials/"+sem+"/"+sub;
         File directory = new File(directoryPath);
 
         if (directory.exists() && directory.isDirectory()) {
@@ -65,7 +65,7 @@ public class FileController {
     public ResponseEntity<byte[]> downloadFile(@PathVariable String fileName ,
                                                @PathVariable String sem,
                                                @PathVariable String sub) {
-        String directoryPath = "/data2/materials/"+sem+"/"+sub;
+        String directoryPath = "/home/ec2-user/materials/"+sem+"/"+sub;
         File file = new File(directoryPath + File.separator + fileName);
 
         HttpHeaders headers = new HttpHeaders();
@@ -85,7 +85,7 @@ public class FileController {
     public ResponseEntity<String> deleteFile(@PathVariable String fileName,
                                              @PathVariable String sem,
                                              @PathVariable String sub) {
-        String directoryPath = "/data2/materials/" + sem + "/" + sub;
+        String directoryPath = "/home/ec2-user/materials/" + sem + "/" + sub;
         File file = new File(directoryPath + File.separator + fileName);
 
         if (file.exists()) {
