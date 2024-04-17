@@ -69,7 +69,7 @@ public class AbsentServiceImpl implements AbsentService {
         } else if ((time == 16 && minute >= 7) || (time == 17 && minute <= 1)) {
             return 7;
         } else {
-            return 8;
+            return 0;
         }
     }
 
