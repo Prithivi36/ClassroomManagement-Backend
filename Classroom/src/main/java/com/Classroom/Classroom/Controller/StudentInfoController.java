@@ -26,6 +26,7 @@ public class StudentInfoController {
     }
 
     //For Dev Test
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/newList")
     public String getMultiple(@RequestBody List<StudentDto> studentDtos){
         for(StudentDto i : studentDtos){

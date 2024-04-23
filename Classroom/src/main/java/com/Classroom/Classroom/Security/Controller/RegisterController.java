@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @CrossOrigin("*")
 @RestController
 @AllArgsConstructor
@@ -18,6 +20,15 @@ public class RegisterController {
     public String newRegistration(@RequestBody RequestDto requestDto){
         return registerService.registerNewUser(requestDto);
     }
+//For Dev
+    @PostMapping("/list/stud")
+    public String newListRegistration(@RequestBody List<RequestDto> requestDto){
+        for (RequestDto requestDto1 : requestDto) {
+            registerService.registerNewUser(requestDto1);
+        }
+        return  "Success";
+    }
+
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/teacher")
