@@ -51,6 +51,10 @@ public class OnDutyServiceImpl implements OnDutyService {
 
             StudentInfo foundStudent=studentRepository.findByRegNo(studentNumber).orElseThrow(()->new APIException(HttpStatus.NOT_FOUND,"Student Not Found"));
             foundStudent.setId(foundStudent.getId());
+            List<OnDutyEntity> foundOnDuty=foundStudent.getOnDutyEntities();
+            if(foundOnDuty.contains(foundDate)){
+                continue;
+            }
             foundStudent.getOnDutyEntities().add(foundDate);
             studentRepository.save(foundStudent);
 
