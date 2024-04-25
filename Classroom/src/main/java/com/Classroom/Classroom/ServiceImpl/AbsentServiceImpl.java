@@ -90,6 +90,10 @@ public class AbsentServiceImpl implements AbsentService {
             });
 
             StudentInfo foundStudent=studentRepository.findByRegNo(studentNumber).orElseThrow(()->new APIException(HttpStatus.NOT_FOUND,"Student Not Found"));
+            List<StudentAbsent> absentList=foundStudent.getAbsentList();
+            if(absentList.contains(foundDate)){
+                continue;
+            }
             foundStudent.getAbsentList().add(foundDate);
             studentRepository.save(foundStudent);
 
