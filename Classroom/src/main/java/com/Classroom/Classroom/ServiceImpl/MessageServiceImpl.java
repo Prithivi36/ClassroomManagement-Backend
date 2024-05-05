@@ -1,6 +1,12 @@
 package com.Classroom.Classroom.ServiceImpl;
 
+import com.Classroom.Classroom.Entity.StudentInfo;
+import com.Classroom.Classroom.Exception.APIException;
+import com.Classroom.Classroom.Repository.StudentRepository;
 import com.Classroom.Classroom.Service.MessengerClass;
+import com.Classroom.Classroom.Service.StudentInfoService;
+import com.Classroom.Classroom.dto.ListDto;
+import com.Classroom.Classroom.dto.StudentDto;
 import com.azure.communication.messages.NotificationMessagesClient;
 import com.azure.communication.messages.NotificationMessagesClientBuilder;
 import com.azure.communication.messages.models.MessageReceipt;
@@ -9,40 +15,65 @@ import com.azure.communication.messages.models.SendMessageResult;
 import com.azure.communication.messages.models.TemplateNotificationContent;
 import com.azure.core.credential.AzureKeyCredential;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@AllArgsConstructor
 public class MessageServiceImpl implements MessengerClass {
 
+    @Autowired
+    StudentRepository studentRepository;
 
+    @Value("${azure.endpoint}")
+    String endpoint;
+
+    @Value("${azure.key}")
+    String azureKey;
+
+    @Value("${azure.channelRegistrationId}")
+    String azureChannelRegistrationId;
 
     @Override
-    public String sendMessage(String message) {
+    public String sendMessage(List<Long> numbers) {
 
-        String endpoint="https://vcr-notice.unitedstates.communication.azure.com";
-        AzureKeyCredential azureKeyCredential= new AzureKeyCredential("buBYgGgHf4/pAsCQ14ArupIeVFwOeUoFoXNGanrfFnNSlm5Z3JNWsRMhGSHWu9VxTdIzZ1dpcq2cXq7DSi64Zg==");
+        AzureKeyCredential azureKeyCredential= new AzureKeyCredential(azureKey);
         NotificationMessagesClient notificationClient=new NotificationMessagesClientBuilder()
                 .endpoint(endpoint)
                 .credential(azureKeyCredential)
                 .buildClient();
 
-        String channelRegistrationId="176387b9-85d1-43b6-be10-ae705e1085ab";
+        String channelRegistrationId=azureChannelRegistrationId;
 
-        List<String> recipientList = new ArrayList<>();
-        recipientList.add("+919952518670");
 
-        String templateName="absent_details";
-        String templateLanguage = "en_us";
-        MessageTemplate messageTemplate = new MessageTemplate(templateName, templateLanguage);
-        TemplateNotificationContent templateContent = new TemplateNotificationContent(channelRegistrationId, recipientList, messageTemplate);
-        SendMessageResult templateMessageResult = notificationClient.send(templateContent);
-        for (MessageReceipt messageReceipt : templateMessageResult.getReceipts()) {
-            System.out.println("Message sent to:" + messageReceipt.getTo() + " and message id:" + messageReceipt.getMessageId());
+
+
+        for(Long id : numbers){
+            List<String> recipientList = new ArrayList<>();
+            StudentInfo stud=studentRepository.findByRegNo(id).orElseThrow(()->new APIException(HttpStatus.NOT_FOUND,"Student Not Found"));
+
+            String parentNum="+91"+stud.getPhone();
+            if(parentNum.equals("+918220812131")||parentNum.equals("+919940811124")){
+                recipientList.add(parentNum);
+            }else {
+                continue;
+            }
+            String templateName="absent_details";
+            String templateLanguage = "en_us";
+            MessageTemplate messageTemplate = new MessageTemplate(templateName, templateLanguage);
+            TemplateNotificationContent templateContent = new TemplateNotificationContent(channelRegistrationId, recipientList, messageTemplate);
+            SendMessageResult templateMessageResult = notificationClient.send(templateContent);
+            for (MessageReceipt messageReceipt : templateMessageResult.getReceipts()) {
+                System.out.println("Message sent to:" + messageReceipt.getTo() + " and message id:" + messageReceipt.getMessageId());
+            }
         }
+
+
+
 
         return "Success";
     }

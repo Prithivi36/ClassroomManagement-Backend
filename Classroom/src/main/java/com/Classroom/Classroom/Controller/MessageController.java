@@ -1,11 +1,12 @@
 package com.Classroom.Classroom.Controller;
 
 import com.Classroom.Classroom.Service.MessengerClass;
+import com.Classroom.Classroom.dto.ListDto;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @AllArgsConstructor
@@ -13,10 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class MessageController {
 
     MessengerClass messengerClass;
+    AbsentController absentController;
 
-    @PreAuthorize("hasAnyRole('ADMIN','STUDENT','REP')")
-    @PatchMapping("/message")
-    public String sendMessage() {
-        return  messengerClass.sendMessage("hi");
+    @PreAuthorize("hasAnyRole('ADMIN','TEACHER')")
+    @PostMapping("/message")
+    public String sendMessage(@RequestBody ListDto<Long> listDto) {
+        String abs=absentController.studentAbsentMarkdown(listDto);
+        return  messengerClass.sendMessage(listDto.getIncomingList());
     }
 }
