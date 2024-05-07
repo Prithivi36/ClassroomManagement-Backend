@@ -41,7 +41,6 @@ public class SecurityConfigurstion {
                     authorizer.requestMatchers(HttpMethod.POST,"/student/new").permitAll();
                     authorizer.requestMatchers(HttpMethod.GET,"/download/**").permitAll();
                     authorizer.requestMatchers(HttpMethod.GET,"/files/**").permitAll();
-                    authorizer.requestMatchers(HttpMethod.GET,"/student/**").permitAll();
                     authorizer.anyRequest().authenticated();
 
                 }).httpBasic(Customizer.withDefaults());

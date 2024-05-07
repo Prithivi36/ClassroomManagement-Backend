@@ -41,12 +41,10 @@ public class StudentInfoController {
     //For IntegTest
     @GetMapping("/integ")
     public List<StudentDto> IntegratedData() throws JsonProcessingException {
-
-
         return externalApiService.GetApi();
     }
 
-//    @PreAuthorize("hasAnyRole('TEACHER','REP')")
+    @PreAuthorize("hasAnyRole('TEACHER','REP')")
     @GetMapping("/getAll")
     public List<StudentDto> grtAllStudent(){
         return studentInfoService.getAllStudentsInfo();
