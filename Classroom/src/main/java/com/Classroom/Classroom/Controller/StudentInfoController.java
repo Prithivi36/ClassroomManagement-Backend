@@ -1,9 +1,11 @@
 package com.Classroom.Classroom.Controller;
 
+import com.Classroom.Classroom.ExternalAPI.ExternalApiService;
 import com.Classroom.Classroom.Service.StudentInfoService;
 import com.Classroom.Classroom.dto.OnDutyDto;
 import com.Classroom.Classroom.dto.StudentAbsentDto;
 import com.Classroom.Classroom.dto.StudentDto;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +20,7 @@ import java.util.List;
 public class StudentInfoController {
 
     private StudentInfoService studentInfoService;
+    ExternalApiService externalApiService;
 
     @PreAuthorize("permitAll()")
     @PostMapping("/new")
@@ -35,7 +38,15 @@ public class StudentInfoController {
         return "Success";
     }
 
-    @PreAuthorize("hasAnyRole('TEACHER','REP')")
+    //For IntegTest
+    @GetMapping("/integ")
+    public List<StudentDto> IntegratedData() throws JsonProcessingException {
+
+
+        return externalApiService.GetApi();
+    }
+
+//    @PreAuthorize("hasAnyRole('TEACHER','REP')")
     @GetMapping("/getAll")
     public List<StudentDto> grtAllStudent(){
         return studentInfoService.getAllStudentsInfo();
