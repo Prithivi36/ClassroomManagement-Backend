@@ -39,6 +39,7 @@ public class StudentInfoController {
     }
 
     //For IntegTest
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/integ")
     public List<StudentDto> IntegratedData() throws JsonProcessingException {
         return externalApiService.GetApi();
