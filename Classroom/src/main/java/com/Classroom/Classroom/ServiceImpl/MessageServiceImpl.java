@@ -57,11 +57,7 @@ public class MessageServiceImpl implements MessengerClass {
             StudentInfo stud=studentRepository.findByRegNo(id).orElseThrow(()->new APIException(HttpStatus.NOT_FOUND,"Student Not Found"));
 
             String parentNum="+91"+stud.getPhone();
-            if(parentNum.equals("+918220812131")||parentNum.equals("+919940811124")){
                 recipientList.add(parentNum);
-            }else {
-                continue;
-            }
             String templateName="absent_details";
             String templateLanguage = "en_us";
             MessageTemplate messageTemplate = new MessageTemplate(templateName, templateLanguage);
