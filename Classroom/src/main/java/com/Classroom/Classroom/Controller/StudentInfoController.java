@@ -1,6 +1,5 @@
 package com.Classroom.Classroom.Controller;
 
-import com.Classroom.Classroom.ExternalAPI.ExternalApiService;
 import com.Classroom.Classroom.Service.StudentInfoService;
 import com.Classroom.Classroom.dto.OnDutyDto;
 import com.Classroom.Classroom.dto.StudentAbsentDto;
