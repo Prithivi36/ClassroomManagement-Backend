@@ -20,7 +20,6 @@ import java.util.List;
 public class StudentInfoController {
 
     private StudentInfoService studentInfoService;
-    ExternalApiService externalApiService;
 
     @PreAuthorize("permitAll()")
     @PostMapping("/new")
@@ -38,12 +37,6 @@ public class StudentInfoController {
         return "Success";
     }
 
-    //For IntegTest
-    @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping("/integ")
-    public List<StudentDto> IntegratedData() throws JsonProcessingException {
-        return externalApiService.GetApi();
-    }
 
     @PreAuthorize("hasAnyRole('TEACHER','REP')")
     @GetMapping("/getAll")
