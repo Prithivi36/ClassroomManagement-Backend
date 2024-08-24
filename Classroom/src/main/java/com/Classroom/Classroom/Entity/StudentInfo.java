@@ -1,5 +1,6 @@
 package com.Classroom.Classroom.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -61,5 +62,8 @@ public class StudentInfo {
     @JoinColumn(name ="student", referencedColumnName = "id")
     private List<LeaveOrOdRequestEntity> leaveOrOdRequests;
 
+    @OneToMany(mappedBy = "studentInfo")
+    @JsonIgnore
+    private List<Achievements> achievements;
 
 }

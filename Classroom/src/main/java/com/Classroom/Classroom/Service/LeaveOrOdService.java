@@ -12,7 +12,7 @@ public interface LeaveOrOdService {
 
     String raiseRequest(LeaveOrOdRequestDto leaveOrOdRequestDto);
     List<LeaveOrOdRequestDto> getAllLeaveRequest();
-    String deleteRequest(Long reqestId);
+    String deleteRequest(Long requestId);
     String acceptOrDeclineRequest(Long requestId);
 
     List<LeaveOrOdRequestDto> getLeaveRequestByRegNo(Long regNo , LocalDate date);
